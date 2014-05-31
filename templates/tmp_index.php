@@ -1,4 +1,7 @@
-<?php include_once __DIR__ . '/../src/DB.php'; ?>
+<?php
+      include_once __DIR__ . '/../src/DB.php';
+      $db = new DB();
+?>
 <!doctype html>
 <html lang="de_DE">
 <head>
@@ -15,7 +18,15 @@
         <td>Ort</td>
         </thead>
         <tbody>
-
+            <?php foreach($db->executeQuery("SELECT * FROM mitarbeiter") as $id => $mitarbeiter): ?>
+                <tr>
+                    <td><?php echo utf8_decode($mitarbeiter['VORNAME']); ?></td>
+                    <td><?php echo utf8_decode($mitarbeiter['NACHNAME']); ?></td>
+                    <td><?php echo utf8_decode($mitarbeiter['STRASSE']); ?></td>
+                    <td><?php echo utf8_decode($mitarbeiter['PLZ']); ?></td>
+                    <td><?php echo utf8_decode($mitarbeiter['ORT']); ?></td>
+                </tr>
+            <?php endforeach ?>
         </tbody>
     </table>
 </body>
